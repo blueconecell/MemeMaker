@@ -3,15 +3,26 @@ const ctx = canvas.getContext("2d");
 canvas.width = 800;
 canvas.height = 800;
 
-ctx.fillRect(200 + 30,200,20,100)
-ctx.fillRect(400 - 30,200,20,100)
-ctx.fillRect(280,200,60,200)
+ctx.lineWidth = 1;
 
-ctx.arc(310,150,30,0,2*Math.PI)
-ctx.fill();
+const colors = [
+    "#ff3838",
+    "#ffb8b8",
+    "#c56cf0",
+    "#ff9f1a",
+    "#fff200",
+    "#32ff7e",
+    "#7efff5",
+    "#18dcff",
+    "#7d5fff",
+];
 
-ctx.beginPath();
-ctx.fillStyle = "skyblue";
-ctx.arc(300,140,5,0,2*Math.PI)
-ctx.arc(320,140,5,1*Math.PI,2*Math.PI)
-ctx.fill()
+function onClick(event){
+    ctx.beginPath();
+    ctx.moveTo(0,0);
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    ctx.strokeStyle = color;
+    ctx.lineTo(event.offsetX, event.offsetY);
+    ctx.stroke();
+}
+canvas.addEventListener("mousemove", onClick);
