@@ -1,14 +1,17 @@
 
 const modeBtn = document.getElementById("mode-btn");
+const destroyBtn = document.getElementById("destroy-btn");
+const eraseBtn = document.getElementById("eraser-btn");
 const colorOptions = Array.from(document.querySelectorAll(".color-option"));
 const color = document.getElementById("color");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 const lineWidth = document.getElementById("line-width");
+const canvas_width = 800;
+const canvas_height = 800;
 
-
-canvas.width = 800;
-canvas.height = 800;
+canvas.width = canvas_width;
+canvas.height = canvas_height;
 
 ctx.lineWidth = 2;
 let isPainting = false;
@@ -54,8 +57,17 @@ function onModeClick(event){
 }
 function onCanvasClick(){
     if(isFilling){
-        ctx.fillRect(0,0,800,800);
+        ctx.fillRect(0,0,canvas_width,canvas_height);
     }
+}
+function onDestroyClick(){
+    ctx.fillStyle = "white";
+    ctx.fillRect(0,0,canvas_width,canvas_height);
+}
+function onEraserClick(){
+    ctx.strokeStyle = "white";
+    isFilling=false;
+    modeBtn.innerText = "Fill";
 }
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", onMouseDown);
@@ -68,8 +80,8 @@ color.addEventListener("change",onChangeColor)
 colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
 
 modeBtn.addEventListener("click", onModeClick);
-
-
+destroyBtn.addEventListener("click", onDestroyClick);
+eraseBtn.addEventListener("click", onEraserClick);
 
 
 
