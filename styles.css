@@ -1,21 +1,42 @@
+@import "reset.css";
+
+
 canvas{
     width: 800px;
     height: 800px;
     border: 1px solid black;
+    background-color: white;
+    border-radius: 10px;
 }
 body{
-    /* display: flex; */
-    justify-content: center;
-    align-items: center;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: gainsboro;
 }
 .color-option{
     width:30px;
     height:30px;
     cursor: pointer;
 }
-.setting{
+.btns{
     display: flex;
+    flex-direction: column;
 }
 .colorSet{
     display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.color-option{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border:5px solid white;
+    cursor: pointer;
+    transition: transform  ease-in-out .1s;
+}
+.color-option:hover{
+    transform: scale(1.2);
 }
