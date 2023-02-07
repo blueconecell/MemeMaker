@@ -1,5 +1,7 @@
 
 const fileInput = document.getElementById("file");
+const textSize = document.getElementById("font-size");
+const textInput = document.getElementById("text");
 const modeBtn = document.getElementById("mode-btn");
 const destroyBtn = document.getElementById("destroy-btn");
 const eraseBtn = document.getElementById("eraser-btn");
@@ -14,6 +16,7 @@ const canvas_height = 800;
 canvas.width = canvas_width;
 canvas.height = canvas_height;
 
+ctx.lineCap = "round"
 ctx.lineWidth = lineWidth.value;
 let isPainting = false;
 let isFilling = false;
@@ -78,9 +81,29 @@ function onFileSelect(event){
     const image = new Image()
     image.src = url;
     image.onload = function(){
-        ctx.drawImage(image,0,0,canvas_width,canvas_height)
+        ctx.drawImage(image,0,0,canvas_width,canvas_height);
+        fileInput.value = null;
     }
 }
+function onDoubleClick(event){
+    ctx.save();
+    const text = textInput.value;
+    // bf = ctx.lineWidth;
+    if(text !==""){
+        ctx.lineWidth = 1;
+        ctx.font = String(textSize.value)+"px serif";
+        ctx.strokeText(text,event.offsetX,event.offsetY);
+        // ctx.lineWidth = bf;
+        ctx.restore();
+    }
+}
+function onChangeFontSize(event){
+    console.log(event.target.value)
+    ctx.font = event.target.value
+}
+
+canvas.addEventListener("dblclick", onDoubleClick);
+textSize.addEventListener("change", onChangeFontSize)
 
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", onMouseDown);
