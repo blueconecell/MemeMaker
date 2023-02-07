@@ -1,5 +1,6 @@
 
 const fileInput = document.getElementById("file");
+const saveBtn = document.getElementById("save");
 const textSize = document.getElementById("font-size");
 const textInput = document.getElementById("text");
 const modeBtn = document.getElementById("mode-btn");
@@ -101,6 +102,13 @@ function onChangeFontSize(event){
     console.log(event.target.value)
     ctx.font = event.target.value
 }
+function onSaveClick(){
+    const url = canvas.toDataURL();
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "myDrawingImg.png";
+    a.click();
+}
 
 canvas.addEventListener("dblclick", onDoubleClick);
 textSize.addEventListener("change", onChangeFontSize)
@@ -119,7 +127,7 @@ modeBtn.addEventListener("click", onModeClick);
 destroyBtn.addEventListener("click", onDestroyClick);
 eraseBtn.addEventListener("click", onEraserClick);
 fileInput.addEventListener("change", onFileSelect);
-
+saveBtn.addEventListener("click",onSaveClick);
 
 
 
